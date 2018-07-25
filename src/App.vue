@@ -7,7 +7,12 @@
 
 <script>
   import FootertGuide from './components/FooterGuide/FooterGuide'
-export default {
+  import {reqFoodCategorys} from "./api";
+
+  export default {
+    mounted(){
+    console.log(reqFoodCategorys());
+  } ,
   name: 'App',
   components:{FootertGuide}
 }
