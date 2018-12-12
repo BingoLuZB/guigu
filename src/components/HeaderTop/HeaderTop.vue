@@ -11,12 +11,7 @@
 <script>
     export default {
       name: "header-top",
-      props:{
-        title:{
-          type:String,
-          required:true
-        }
-      }
+      props:['title']
     }
 </script>
 

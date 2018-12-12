@@ -7,12 +7,12 @@
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name||'登录/注册'}}</p>
           <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">{{userInfo.phone||'暂无绑定手机号'}}</span>
           </p>
         </div>
         <span class="arrow">
@@ -88,20 +88,41 @@
         </div>
       </a>
     </section>
+    <section v-if="userInfo.name">
+      <div class="outLogin" @click="loginOut">
+        退出登录
+      </div>
+    </section>
   </section>
 </template>
 
 <script>
   import HeaderTop from '../../components/HeaderTop/HeaderTop'
+  import {mapState,mapActions} from 'vuex'
   export default {
     components:{
       HeaderTop
     },
     methods:{
+      ...mapActions(['saveUser','resetUserInfo']),
       gotologin(){
-        this.$router.push('/login')
+        if(!this.userInfo.name||!this.userInfo.phone){
+          this.$router.push('/login')
+        }else{
+          this.$router.push('/userInfo')
+        }
+      },
+      loginOut(){
+        this.resetUserInfo()
       }
+    },
+    mounted(){
+
+    },
+    computed:{
+      ...mapState(['userInfo'])
     }
+
   }
 </script>
 
@@ -110,6 +131,18 @@
   .profile //我的
     overflow hidden
     width 100%
+    .outLogin{
+      width: 100%;
+      height: 50px;
+      background-color: red;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3%;
+      margin-top 20px;
+    }
+
     .profile-number
       margin-top 45.5px
       .profile-link

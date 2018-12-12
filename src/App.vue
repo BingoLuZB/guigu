@@ -7,12 +7,17 @@
 
 <script>
   import FootertGuide from './components/FooterGuide/FooterGuide'
-  import {reqFoodCategorys} from "./api";
-
+  import {mapActions} from 'vuex'
   export default {
     mounted(){
-    console.log(reqFoodCategorys());
-  } ,
+      this.$store.dispatch('getAddress')
+      if(sessionStorage.getItem('userInfo')){
+        this.$store.dispatch('saveUser',{name:'娃哈哈',phone:13249267670})
+      }
+    } ,
+    methods:{
+      ...mapActions(['saveUser']),
+    },
   name: 'App',
   components:{FootertGuide}
 }
