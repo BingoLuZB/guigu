@@ -14,7 +14,7 @@
       if(sessionStorage.getItem('userInfo')){
         this.$store.dispatch('saveUser',{name:'娃哈哈',phone:13249267670})
       }
-      console.log('测试git');
+      console.log('测试git是否是最新');
     } ,
     methods:{
       ...mapActions(['saveUser']),
